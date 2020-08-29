@@ -22,13 +22,14 @@
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
            <li>
-             <%= link_to "#" do %>
+             <%= link_to favorites_index_path do %>
               <%= image_tag "icons/heart.png" %>
              <% end %>
            </li>
            <li>
-             <%= link_to "#" do %>
-              <%= image_tag "icons/camera.png" %>
+             <% if logged_in? %>
+             <%= link_to new_topic_path do %>
+               <%= image_tag "icons/camera.png" %>
              <% end %>
            </li>
            <li>
@@ -43,13 +44,21 @@
             <% end %>
            </li>
            <li>
-        <% end %>
+             <%= link_to login_path do %>
+              <%= image_tag "icons/login.png" %>
+            <% end %>
+           </li>
+          <% end %>
         </ul>
       </div>
     </nav>
-           
-    
+    <%= flash.each do |key, value| %>
+           <div class="alert alert-<%= key %>" role="alert"><% value %></div>   
+    <% end %>
+   <% end %>
+  
     <%= yield %>
+    
     
     <script>
     $(function(){
@@ -58,3 +67,4 @@
     </script>
   </body>
 </html>
+
